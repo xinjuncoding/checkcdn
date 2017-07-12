@@ -8,11 +8,11 @@ import shutil
 
 _FILE_SLIM = (100*1024*1024) # 100MB
 
-# cdn_domain = 'image.cqby.qq.com'
-# dev_dir = 'test2'
+cdn_domain = 'image.cqby.qq.com'
+dev_dir = 'test2'
 
-cdn_domain = 'cqtxrestest.37wan.5ypy.com'
-dev_dir = 'tx_dev'
+# cdn_domain = 'cqtxrestest.37wan.5ypy.com'
+# dev_dir = 'tx_dev'
 
 CHECKIPS_FLAG = False
 
@@ -39,8 +39,6 @@ def errorfile(file, errmsg):
 	f.close()
 
 def requireCdnRes(logfile):
-	shutil.rmtree('cdnres/', True)
-
 	f = open(logfile, 'rb')
 	while True:
 		line = f.readline()
@@ -84,6 +82,8 @@ def updateHost(ip):
 	os.remove('hosts-dst')
 
 def checkips():
+	shutil.rmtree('cdnres/', True)
+	
 	if os.path.exists('error.txt') == True:
 		os.remove('error.txt')
 	cdmline = "nslookup "+cdn_domain + " > checkips.txt"
